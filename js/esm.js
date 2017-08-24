@@ -248,7 +248,7 @@ esm.getPing = function() {
         {
             var html = '';
             html += '<tr>';
-            html += '<td><a href="'+data[line].host+'">'+data[line].host+'</a></td>';
+            html += '<td><a href="http://'+data[line].host+'" target="_blank">'+data[line].host+'</a></td>';
 
             html += '<td class="w15p"><span class="label ';
             if (data[line].ping.indexOf('Inf') > -1) {
