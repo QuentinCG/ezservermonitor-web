@@ -344,14 +344,14 @@ esm.setServices = function(id) {
 							var html = '';
 							html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
 
-              if (data[id].start != null && data[id].stop != null)
-              {
-                  html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
-              }
-              else
-              {
-                  html += '<td></td>';
-              }
+							if (data[id].start != null && data[id].stop != null)
+							{
+								html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
+							}
+							else
+							{
+								html += '<td></td>';
+							}
 
 							html += '<td>'+data[id].name+'</td>';
 							html += '<td class="w15p">'+data[id].port+'</td>';
