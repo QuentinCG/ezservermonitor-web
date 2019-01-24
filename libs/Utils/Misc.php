@@ -124,7 +124,7 @@ class Misc
 
         foreach ($cmds as $cmd)
         {
-            if (trim(shell_exec($cmd.$args)) != '')
+            if (trim(shell_exec($cmd.' 2>/dev/null '.$args)) != '')
             {
                 $return = $cmd;
                 
@@ -189,20 +189,27 @@ class Misc
 
             $write = fwrite($handle, 'x00');
 
-            $startTime = time();
-
-            $header = fread($handle, 1);
-
-            $endTime = time();
-
-            $timeDiff = $endTime - $startTime; 
-            
-            fclose($handle);
-
-            if ($timeDiff >= $timeout)
-                return true;
-            else
+            if ($write === false)
+            {
                 return false;
+            }
+            else
+            {
+                $startTime = time();
+
+                $header = fread($handle, 1);
+
+                $endTime = time();
+
+                $timeDiff = $endTime - $startTime; 
+                
+                fclose($handle);
+
+                if ($timeDiff >= $timeout)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         return false;
