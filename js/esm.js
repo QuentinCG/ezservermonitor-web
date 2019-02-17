@@ -288,13 +288,13 @@ esm.getServices = function() {
         {
             var label_color  = data[line].status == 1 ? 'success' : 'error';
             var label_status = data[line].status == 1 ? 'online' : 'offline';
-			var label_gestion = data[line].status == 1 ? 'fa fa-stop"' : 'fa fa-play';
+			var label_gestion = data[line].status == 1 ? (data[line].stop != null ? 'fa fa-stop"' : 'fa fa-refresh"') : 'fa fa-play';
 
             var html = '';
             html += '<tr>';
             html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
 
-            if (data[line].start != null && data[line].stop != null)
+            if (data[line].start != null && (data[line].stop != null || data[line].reload != null))
             {
                 html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
             }
@@ -339,12 +339,12 @@ esm.setServices = function(id) {
 						
 							var label_color  = data[id].status == 1 ? 'success' : 'error';
 							var label_status = data[id].status == 1 ? 'online' : 'offline';
-							var label_gestion = data[id].status == 1 ? 'fa fa-stop"' : 'fa fa-play';
+							var label_gestion = data[id].status == 1 ? (data[id].stop != null ? 'fa fa-stop"' : 'fa fa-refresh"') : 'fa fa-play';
 
 							var html = '';
 							html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
 
-							if (data[id].start != null && data[id].stop != null)
+							if (data[id].start != null && (data[id].stop != null || data[id].reload  != null))
 							{
 								html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
 							}

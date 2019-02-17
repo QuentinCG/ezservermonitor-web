@@ -18,6 +18,7 @@ if (count($Config->get('services:list')) > 0)
         $name     = $service['name'];
 		$stop     = $service['stop'];
 		$start     = $service['start'];
+		$reload     = $service['reload'];
         $protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 
         if (Misc::scanPort($host, $port, $protocol))
@@ -31,6 +32,7 @@ if (count($Config->get('services:list')) > 0)
             'status'    => $status,
 			'stop'      => $stop,
 			'start'     => $start,
+			'reload'     => $reload,
         );
     }
 }
