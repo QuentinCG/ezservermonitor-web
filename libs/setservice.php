@@ -18,18 +18,26 @@ if(isset($_GET['id']))
 		if(isset($services[$id]))
 		{
 			$service = $services[$id];
-			
+
 			$host     = $service['host'];
 			$port     = $service['port'];
 			$stop     = $service['stop'];
-			$reload     = $service['reload'];
-			$start     = $service['start'];
-			
+			$reload   = $service['reload'];
+			$start    = $service['start'];
+
 			$protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 			if (Misc::scanPort($host, $port, $protocol))
 			{
-				echo exec('sudo '.($stop != null ? $stop : $reload));
-				echo ' stop demande ';
+				$command = ($stop != null ? $stop : $reload);
+				echo exec('sudo '.$command);
+				if ($stop != null)
+				{
+				  echo ' stop demande ';
+				}
+				else
+				{
+				  echo ' reload demande ';
+				}
 			}
 			else
 			{

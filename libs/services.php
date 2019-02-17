@@ -16,9 +16,9 @@ if (count($Config->get('services:list')) > 0)
         $host     = $service['host'];
         $port     = $service['port'];
         $name     = $service['name'];
-		$stop     = $service['stop'];
-		$start     = $service['start'];
-		$reload     = $service['reload'];
+        $stop     = $service['stop'];
+        $start    = $service['start'];
+        $reload   = $service['reload'];
         $protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 
         if (Misc::scanPort($host, $port, $protocol))
@@ -30,9 +30,9 @@ if (count($Config->get('services:list')) > 0)
             'port'      => $show_port === true ? $port : '',
             'name'      => $name,
             'status'    => $status,
-			'stop'      => $stop,
-			'start'     => $start,
-			'reload'     => $reload,
+            'stop'      => $stop,
+            'start'     => $start,
+            'reload'     => $reload,
         );
     }
 }
