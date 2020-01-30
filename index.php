@@ -56,7 +56,11 @@ $update = $Config->checkUpdate();
         else
             echo Misc::getHostname().' - '.Misc::getLanIP();
         ?>
+
+    (with also: <b><a href="adminer.php" target=_blank>Adminer</a></b>, <b><a href="phpinfo.php" target=_blank>Php-Info</a></b>)
+
     </div>
+
 
     <?php if (!is_null($update)): ?>
         <div id="update">
