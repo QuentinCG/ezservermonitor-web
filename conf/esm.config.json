@@ -80,5 +80,8 @@
 				
             }
         ]
-    }
+    },
+    "package_management": {
+        "apt": true
+     }
 }
