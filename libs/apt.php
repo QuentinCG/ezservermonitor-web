@@ -25,6 +25,11 @@ $Config = new Config();
     * The command `apt-get update` **must** be run before this will report the correct number of
         packages. As this will need to be run with super user privaleges, it is recommended that a
         simple cron job or timer script be configured for this job.
+        It is possible to enable it directly by putting 'apt_update_before_check' parameter to true.
+        Note that you'll then need to grant sudo apt-get rights to www-data:
+        `sudo visudo`
+        www-data ALL=(ALL) NOPASSWD: /bin/apt-get
+        <!> ACTIVATING IT MAY HAVE IMPACT ON SECURITY OF YOUR COMPUTER SO USE IT WITH CAUTION
     * The `apt-get` approach is used if the `apt-check` command cannot be found. Most likely, it
         means that this script is not running in an Ubuntu environment.
     * Basically, this calls and filters 'apt-get --simulate dist-upgrade'. If this call is
