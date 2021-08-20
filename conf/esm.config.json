@@ -82,6 +82,7 @@
         ]
     },
     "package_management": {
-        "apt": true
+        "apt": true,
+        "apt_update_before_check": false
      }
 }

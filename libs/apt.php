@@ -11,24 +11,24 @@ $Config = new Config();
 
     'apt-check' notes:
     * apt-check is the utility used by apt to determine if there are packages available in Ubuntu
-        distributions. 
+        distributions.
     * If called with no parameters, it returns with a tuple of numbers in the format: <standard>;<security>
         - 'standard' is an int representing the upgrade packages available
         - 'security' is an int representing the security upgrade packages available
     * At least on Ubuntu 20.x, the path of the 'apt-check' utility is
         '/usr/lib/update-notifier/apt-check'. The utility and it's path will need to be validated
         on other Ubuntu versions.
-    * The results of apt-check are cached on the OS side of things and thus, if we can, we should 
+    * The results of apt-check are cached on the OS side of things and thus, if we can, we should
         prefer the use of this command.
-    
+
     'apt-get' notes:
-    * The command `apt-get update` **must** be run before this will report the correct number of 
+    * The command `apt-get update` **must** be run before this will report the correct number of
         packages. As this will need to be run with super user privaleges, it is recommended that a
         simple cron job or timer script be configured for this job.
-    * The `apt-get` approach is used if the `apt-check` command cannot be found. Most likely, it 
+    * The `apt-get` approach is used if the `apt-check` command cannot be found. Most likely, it
         means that this script is not running in an Ubuntu environment.
-    * Basically, this calls and filters 'apt-get --simulate dist-upgrade'. If this call is 
-        successful, the results are filtered with php commands to get the number of standard and 
+    * Basically, this calls and filters 'apt-get --simulate dist-upgrade'. If this call is
+        successful, the results are filtered with php commands to get the number of standard and
         security updates.
     * This call is not cached and can take a bit of time to complete.
     * In the grand scheme of things, this is basically running these two CLI commands:
@@ -54,6 +54,7 @@ $Config = new Config();
 */
 
 $configKey = 'package_management:apt';
+$optionalUpdateKey = 'package_management:apt_update_before_check';
 
 // The command paths. Intentionally not configurable to prevent remote execution bugs.
 $apt_get_root_path = '/bin/apt-get';
@@ -66,7 +67,7 @@ if(file_exists($apt_get_root_path)) {
     $apt_get_path = $apt_get_root_path;
 } else if( file_exists($apt_get_usr_path)) {
     $apt_get_path = $apt_get_usr_path;
-} 
+}
 
 $datas = array();
 
@@ -78,6 +79,17 @@ if ($Config->get($configKey) == false ) {
     $datas['status'] = 1;
     $datas['message'] = 'Disabled';
 } elseif ($Config->get($configKey) == true ) {
+    $update_before_check = false;
+    // If requested in config, update apt (getting latest infos from apt server) before doing an apt-check
+    // WARNING (security potential issue): sudo apt-get will then need to be allowed for www-data user
+    if ($Config->get($optionalUpdateKey) == true) {
+        $updateCommand = 'sudo ' . $apt_get_path . ' -q -y update';
+        $execresult = exec($updateCommand, $output, $retval);
+        if ( $retval != 0 ) {
+            error_log("Failed to execute '$updateCommand' from php script");
+        }
+    }
+
     // Check each command path for existance & if it's executable.
     if( file_exists($apt_check_path) && is_executable($apt_check_path) ) {
         $command_path = $apt_check_path;
@@ -110,7 +122,7 @@ if ($Config->get($configKey) == false ) {
             // Success - now filter the results
             $standard = preg_grep('/^Inst/', $output);
             $security = preg_grep('/securi/i', $standard);
-    
+
             $datas['status'] = 0;
             $datas['message'] = 'Success';
             $datas['standard'] = sizeof($standard);
