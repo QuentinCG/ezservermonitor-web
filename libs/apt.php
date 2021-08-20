@@ -87,7 +87,7 @@ if ($Config->get($configKey) == false ) {
     $update_before_check = false;
     // If requested in config, update apt (getting latest infos from apt server) before doing an apt-check
     // WARNING (security potential issue): sudo apt-get will then need to be allowed for www-data user
-    if ($Config->get($optionalUpdateKey) == true) {
+    if ($Config->get($optionalUpdateKey) == true && $apt_get_path != '' && file_exists($apt_get_path) && is_executable($apt_get_path)) {
         $updateCommand = 'sudo ' . $apt_get_path . ' -q -y update';
         $execresult = exec($updateCommand, $output, $retval);
         if ( $retval != 0 ) {
