@@ -325,7 +325,7 @@ $update = $Config->checkUpdate();
 
     <div class="cls"></div>
 
-    <div class="box column-left column-33" id="esm-last_login">
+    <div class="box column-left" id="esm-last_login">
         <div class="box-header">
             <h1>Last login</h1>
             <ul>
@@ -345,7 +345,7 @@ $update = $Config->checkUpdate();
     </div>
 
 
-    <div class="box column-right column-33" id="esm-services">
+    <div class="box column-right" id="esm-services">
         <div class="box-header">
             <h1>Services status</h1>
             <ul>
@@ -376,7 +376,7 @@ $update = $Config->checkUpdate();
     </div>
 
     <?php if ($Config->get('package_management:apt') == true): ?>
-        <div class="box column-left column-33" id="esm-apt">
+        <div class="box column-left" id="esm-apt">
             <div class="box-header">
                 <h1>Package Update Status</h1>
                 <ul>
