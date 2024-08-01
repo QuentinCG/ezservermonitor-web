@@ -7,7 +7,7 @@ $update = $Config->checkUpdate();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
@@ -249,7 +249,7 @@ $update = $Config->checkUpdate();
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -327,7 +327,7 @@ $update = $Config->checkUpdate();
 
 
     <div class="t-center">
-        <div class="box column-left column-33" id="esm-last_login">
+        <div class="box column-left" id="esm-last_login">
             <div class="box-header">
                 <h1>Last login</h1>
                 <ul>
@@ -346,9 +346,24 @@ $update = $Config->checkUpdate();
             </div>
         </div>
 
+        <?php if ($Config->get('package_management:apt') == true): ?>
+            <div class="box column-left" id="esm-apt">
+                <div class="box-header">
+                    <h1>Package Update Status</h1>
+                    <ul>
+                        <li><a href="#" class="reload" onclick="esm.reloadBlock('apt');"><span class="icon-cycle"></span></a></li>
+                    </ul>
+                </div>
 
+                <div class="box-content">
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endif; ?>
 
-        <div class="box column-right column-33" id="esm-services">
+        <div class="box column-right" id="esm-services">
             <div class="box-header">
                 <h1>Services status</h1>
                 <ul>
@@ -380,28 +395,9 @@ $update = $Config->checkUpdate();
                 </table>
             </div>
         </div>
-
     </div>
-
-    <?php if ($Config->get('package_management:apt') == true): ?>
-    <div class="box column-left column-33" id="esm-apt">
-        <div class="box-header">
-            <h1>Package Update Status</h1>
-            <ul>
-                <li><a href="#" class="reload" onclick="esm.reloadBlock('apt');"><span class="icon-cycle"></span></a></li>
-            </ul>
-        </div>
-
-        <div class="box-content">
-            <table>
-                <tbody></tbody>
-            </table>
-        </div>
-    </div>
-    <?php endif; ?>
 
     <div class="cls"></div>
-
 </div>
 
 
