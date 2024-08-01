@@ -73,7 +73,7 @@ else
     {
         $ip = null;
 
-        $getIp_cmd = getIpCommand($commands, $name);        
+        $getIp_cmd = getIpCommand($commands, $name);
 
         if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
         {
@@ -100,12 +100,15 @@ else
         exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
         exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
 
-        $datas[] = array(
-            'interface' => $interface['name'],
-            'ip'        => $interface['ip'],
-            'transmit'  => Misc::getSize($getBandwidth_tx[0]),
-            'receive'   => Misc::getSize($getBandwidth_rx[0]),
-        );
+        if ($interface['name'] !== "lo") {
+            $datas[] = array(
+                'interface' => $interface['name'],
+                'ip'        => $interface['ip'],
+                'transmit'  => Misc::getSize($getBandwidth_tx[0]),
+                'receive'   => Misc::getSize($getBandwidth_rx[0]),
+            );
+        }
+
 
         unset($getBandwidth_tx, $getBandwidth_rx);
     }
