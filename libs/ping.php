@@ -10,9 +10,9 @@ if (count($Config->get('ping:hosts')) > 0)
 else
     $hosts = array('google.com', 'wikipedia.org');
 
-$remote_addr = $_SERVER["REMOTE_ADDR"];
-array_push($hosts, $remote_addr);
-array_unshift($hosts, array_pop($hosts));
+//$remote_addr = $_SERVER["REMOTE_ADDR"];
+//array_push($hosts, $remote_addr);
+//array_unshift($hosts, array_pop($hosts));
 
 foreach ($hosts as $host)
 {
@@ -31,6 +31,6 @@ foreach ($hosts as $host)
     unset($result);
 }
 
-$datas[0]["host"] = "Remote client ({$remote_addr})";
+//$datas[0]["host"] = "Remote client ({$remote_addr})";
 
 echo json_encode($datas);
