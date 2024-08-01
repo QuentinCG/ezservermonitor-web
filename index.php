@@ -360,7 +360,7 @@ $update = $Config->checkUpdate();
         </div>
     </div>
 
-    <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
+    <div class="box column-left" id="esm-ping">
         <div class="box-header">
             <h1>Ping</h1>
             <ul>
@@ -376,7 +376,7 @@ $update = $Config->checkUpdate();
     </div>
 
     <?php if ($Config->get('package_management:apt') == true): ?>
-        <div class="box column-left" id="esm-apt">
+        <div class="box column-right" id="esm-apt">
             <div class="box-header">
                 <h1>Package Update Status</h1>
                 <ul>
