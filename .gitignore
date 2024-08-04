@@ -2,3 +2,4 @@
 .htpasswd
 .htaccess
 .htdigest
+conf/esm.config.json

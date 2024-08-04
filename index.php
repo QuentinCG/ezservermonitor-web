@@ -56,13 +56,7 @@ $update = $Config->checkUpdate();
         else
             echo Misc::getHostname().' - '.Misc::getLanIP();
         ?>
-
-        (with also:
-	<!-- adminer.org --><b><a href="adminer.php" target=_blank>Adminer</a></b>,
-	<!-- github.com/Arrexel/phpbash --><b><a href="phpbash.min.php" target=_blank>Bash</a></b>,
-	<b><a href="phpinfo.php" target=_blank>Php-Info</a></b>
-        )
-
+        (with also: <!-- adminer.org --><b><a href="adminer.php" target=_blank>Adminer</a></b>, <!-- github.com/Arrexel/phpbash --><b><a href="phpbash.min.php" target=_blank>Bash</a></b>, <b><a href="phpinfo.php" target=_blank>Php-Info</a></b>, <b><a href="log/" target=_blank>Logs</a>)
     </div>
 
 
