@@ -47,13 +47,13 @@ if(isset($_GET['id']))
 				exec('sudo '.$command, $output_exec);
 				if ($stop != null)
 				{
-				  echo ' Stop demande sur port '.$port.': '$command;
-				  error_log('INFO: Stop demande sur port '.$port.': '$command);
+				  echo ' Stop demande sur port '.$port.': '.$command;
+				  error_log('INFO: Stop demande sur port '.$port.': '.$command);
 				}
 				else
 				{
-				  echo ' Reload demande sur port '.$port.': '$command;
-				  error_log('INFO: Stop demande sur port '.$port.': '$command);
+				  echo ' Reload demande sur port '.$port.': '.$command;
+				  error_log('INFO: Stop demande sur port '.$port.': '.$command);
 				}
 
 				echo 'Resultat de la commande: '.$output_exec;
@@ -62,8 +62,8 @@ if(isset($_GET['id']))
 			else
 			{
 				echo exec('sudo '.$start, $output_exec);
-				echo ' Start demande sur port '.$port.': '$command;
-				error_log('INFO: Stop demande sur port '.$port.': '$command);
+				echo ' Start demande sur port '.$port.': '.$command;
+				error_log('INFO: Stop demande sur port '.$port.': '.$command);
 
 				echo 'Resultat de la commande: '.$output_exec;
 				error_log('INFO: Resultat de la commande: '.$output_exec);
