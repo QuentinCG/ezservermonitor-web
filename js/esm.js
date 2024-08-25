@@ -4,7 +4,7 @@ var esm = {};
 esm.getSystem = function() {
 
     var module = 'system';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -23,7 +23,7 @@ esm.getSystem = function() {
 esm.getLoad_average = function() {
 
     var module = 'load_average';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -44,7 +44,7 @@ esm.getLoad_average = function() {
 esm.getCpu = function() {
 
     var module = 'cpu';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -63,7 +63,7 @@ esm.getCpu = function() {
 esm.getMemory = function() {
 
     var module = 'memory';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -97,7 +97,7 @@ esm.getMemory = function() {
 esm.getSwap = function() {
 
     var module = 'swap';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -120,7 +120,7 @@ esm.getSwap = function() {
             $progress.addClass('orange');
         else
             $progress.addClass('red');
-
+    
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -131,7 +131,7 @@ esm.getSwap = function() {
 esm.getDisk = function() {
 
     var module = 'disk';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -165,7 +165,7 @@ esm.getDisk = function() {
 
             $box.append(html);
         }
-
+    
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -176,7 +176,7 @@ esm.getDisk = function() {
 esm.getLast_login = function() {
 
     var module = 'last_login';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -194,7 +194,7 @@ esm.getLast_login = function() {
 
             $box.append(html);
         }
-
+    
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -205,7 +205,7 @@ esm.getLast_login = function() {
 esm.getNetwork = function() {
 
     var module = 'network';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -236,7 +236,7 @@ esm.getNetwork = function() {
 esm.getPing = function() {
 
     var module = 'ping';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
@@ -263,7 +263,7 @@ esm.getPing = function() {
 
             $box.append(html);
         }
-
+    
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -274,14 +274,14 @@ esm.getPing = function() {
 esm.getServices = function() {
 
     var module = 'services';
-
+    
     esm.reloadBlock_spin(module);
 
     $.get('libs/'+module+'.php', function(data) {
 
         var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
-
+		
 		var id = 0 ;
 
         for (var line in data)
@@ -296,7 +296,8 @@ esm.getServices = function() {
 
             if (data[line].start != null && (data[line].stop != null || data[line].reload != null))
             {
-                html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';            }
+                html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
+            }
             else
             {
                 html += '<td></td>';
@@ -307,35 +308,36 @@ esm.getServices = function() {
             html += '</tr>';
 
             $box.append(html);
-
+			
 			id++;
         }
-
+    
         esm.reloadBlock_spin(module);
 
     }, 'json');
+
 }
 
 
 esm.setServices = function(id) {
-	console.log("Service ID: " + id);
-
+	
 	var debug = false ;
 	var module = 'services';
-
+	
 	$("a[service="+id+"]").toggleClass('spin disabled');
-
-	$.get('libs/setservice.php?id='+id, function(resultat){
-
+	 	
+		
+	$.get('libs/setservice.php?id='+id, function(resultat){ 
+	
 		// On actualise la ligne correspondant au service
-
+		
 		setTimeout(function() {
-
+			
 				$.get('libs/'+module+'.php', function(data) {
 
 						var $ligne = $("a[service="+id+"]").parent("td").parent("tr");
 						$ligne.empty();
-
+						
 							var label_color  = data[id].status == 1 ? 'success' : 'error';
 							var label_status = data[id].status == 1 ? 'online' : 'offline';
 							var label_gestion = data[id].status == 1 ? (data[id].stop != null ? 'fa fa-stop"' : 'fa fa-refresh"') : 'fa fa-play';
@@ -345,7 +347,8 @@ esm.setServices = function(id) {
 
 							if (data[id].start != null && (data[id].stop != null || data[id].reload  != null))
 							{
-								html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';							}
+								html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
+							}
 							else
 							{
 								html += '<td></td>';
@@ -357,14 +360,14 @@ esm.setServices = function(id) {
 							$ligne.append(html);
 
 					}, 'json');
-
+			
 		},15); // on attend un certains temps afin d'être sur que la commande ait été appliqué.
-
+		
 		if(debug) console.log(resultat);
 
 	});
 }
-
+	
 
 esm.getAptStatus = function() {
     var module = 'apt';
@@ -453,7 +456,7 @@ esm.reconfigureGauge = function($gauge, newValue) {
     else
         color = colors.red;
 
-    $gauge.trigger('configure', {
+    $gauge.trigger('configure', { 
         'fgColor': color,
         'inputColor': color,
         'fontWeight': 'normal',
