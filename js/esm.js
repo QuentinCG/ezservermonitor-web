@@ -320,9 +320,15 @@ esm.getServices = function() {
 
 
 esm.setServices = function(id) {
-
 	var debug = true;
 	var module = 'services';
+
+	// Check if the button is disabled
+	var $button = $("a[service="+id+"]");
+	if ($button.hasClass('disabled')) {
+		if(debug) console.log('Service ' + id + ' action prevented because the button is disabled.');
+		return; // Exit the function if the button is disabled
+	}
 
 	$("a[service="+id+"]").toggleClass('spin disabled');
 
