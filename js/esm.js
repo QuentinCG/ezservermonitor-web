@@ -296,8 +296,7 @@ esm.getServices = function() {
 
             if (data[line].start != null && (data[line].stop != null || data[line].reload != null))
             {
-                html += '<td><a class="reload" service='+id+' ><span class="'+label_gestion+'"></span></a></td>';
-            }
+                html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';            }
             else
             {
                 html += '<td></td>';
@@ -312,13 +311,6 @@ esm.getServices = function() {
 			id++;
         }
 
-        // Prevent multiple click events on the reload button
-        $('.box#esm-'+module+' .box-content tbody').off('click', 'a.reload').on('click', 'a.reload', function() {
-            console.log('Reload service requested');
-            var id = $(this).attr('service');
-            esm.setServices(id);
-        });
-
         esm.reloadBlock_spin(module);
 
     }, 'json');
@@ -332,7 +324,6 @@ esm.setServices = function(id) {
 	var module = 'services';
 
 	$("a[service="+id+"]").toggleClass('spin disabled');
-
 
 	$.get('libs/setservice.php?id='+id, function(resultat){
 
@@ -354,8 +345,7 @@ esm.setServices = function(id) {
 
 							if (data[id].start != null && (data[id].stop != null || data[id].reload  != null))
 							{
-								html += '<td><a class="reload" service='+id+'><span class="'+label_gestion+'"></span></a></td>';
-							}
+								html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';							}
 							else
 							{
 								html += '<td></td>';
