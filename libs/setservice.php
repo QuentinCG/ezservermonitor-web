@@ -3,7 +3,7 @@
 if(isset($_GET['id']))
 {
 	$id = $_GET['id'] ;
-		
+
 	require '../autoload.php';
 	$Config = new Config();
 
@@ -21,9 +21,24 @@ if(isset($_GET['id']))
 
 			$host     = $service['host'];
 			$port     = $service['port'];
-			$stop     = $service['stop'];
-			$reload   = $service['reload'];
-			$start    = $service['start'];
+
+			if (in_array("stop", $service)) {
+				$stop = $service['stop'];
+			} else {
+				$stop = null;
+			}
+
+			if (in_array("reload", $service)) {
+				$reload = $service['reload'];
+			} else {
+				$reload = null;
+			}
+
+			if (in_array("start", $service)) {
+				$start = $service['start'];
+			} else {
+				$start = null;
+			}
 
 			$protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 			if (Misc::scanPort($host, $port, $protocol))
@@ -32,21 +47,24 @@ if(isset($_GET['id']))
 				echo exec('sudo '.$command);
 				if ($stop != null)
 				{
-				  echo ' stop demande ';
+				  echo ' Stop demande sur port '.$port;
+				  error_log('INFO: Stop demande sur port '.$port);
 				}
 				else
 				{
-				  echo ' reload demande ';
+				  echo ' Reload demande sur port '.$port;
+				  error_log('INFO: Stop demande sur port '.$port);
 				}
 			}
 			else
 			{
 				echo exec('sudo '.$start);
-				echo ' start demande ';
+				echo ' Start demande sur port '.$port;
+				error_log('INFO: Stop demande sur port '.$port);
 			}
-				
-			
-		}		
+
+
+		}
 	}
 }
 
