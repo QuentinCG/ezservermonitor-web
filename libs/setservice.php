@@ -21,40 +21,39 @@ if(isset($_GET['id']))
 
 			$host     = $service['host'];
 			$port     = $service['port'];
-
-			$stop = in_array("stop", $service) ? $service['stop'] : null;
-			$reload = in_array("reload", $service) ? $service['reload'] : null;
-			$start = in_array("start", $service) ? $service['start'] : null;
+			$stop = $service['stop'];
+			$reload = $service['reload'];
+			$start = $service['start'];
 
 			$protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 			if (Misc::scanPort($host, $port, $protocol))
 			{
 				$command = ($stop != null ? $stop : $reload);
-				exec('sudo '.$command, $output_exec);
+				exec("sudo $command", $output_exec);
 				if ($stop != null)
 				{
 				  echo ' Stop demande sur port '.$port.': '.$command;
-				  error_log('INFO: Stop demande sur port '.$port.': '.$command);
+				  error_log("INFO: Stop demande sur port $port: $command");
 				}
 				else
 				{
 				  echo ' Reload demande sur port '.$port.': '.$command;
-				  error_log('INFO: Stop demande sur port '.$port.': '.$command);
+				  error_log("INFO: Stop demande sur port $port: $command");
 				}
 
 				$display_output = var_dump(implode(",", $output_exec));
 				echo 'Resultat de la commande: '.$display_output;
-				error_log('INFO: Resultat de la commande: '.$display_output);
+				error_log("INFO: Resultat de la commande: $display_output");
 			}
 			else
 			{
 				echo exec('sudo '.$start, $output_exec);
-				echo ' Start demande sur port '.$port.': '.$command;
-				error_log('INFO: Stop demande sur port '.$port.': '.$command);
+				echo ' Start demande sur port '.$port.': '.$start;
+				error_log("INFO: Stop demande sur port $port: $start");
 
 				$display_output = var_dump(implode(",", $output_exec));
 				echo 'Resultat de la commande: '.$display_output;
-				error_log('INFO: Resultat de la commande: '.$display_output);
+				error_log("INFO: Resultat de la commande: $display_output");
 			}
 
 
