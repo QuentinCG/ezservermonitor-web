@@ -296,7 +296,7 @@ esm.getServices = function() {
 
             if (data[line].start != null && (data[line].stop != null || data[line].reload != null))
             {
-                html += '<td><a class="reload spin disabled" service='+id+' ><span class="'+label_gestion+'"></span></a></td>';
+                html += '<td><a class="reload" service='+id+' ><span class="'+label_gestion+'"></span></a></td>';
             }
             else
             {
@@ -314,6 +314,7 @@ esm.getServices = function() {
 
         // Prevent multiple click events on the reload button
         $('.box#esm-'+module+' .box-content tbody').off('click', 'a.reload').on('click', 'a.reload', function() {
+            console.log('Reload service requested');
             var id = $(this).attr('service');
             esm.setServices(id);
         });
@@ -325,6 +326,7 @@ esm.getServices = function() {
 
 
 esm.setServices = function(id) {
+	console.log("Service ID: " + id);
 
 	var debug = false ;
 	var module = 'services';
