@@ -56,8 +56,9 @@ if(isset($_GET['id']))
 				  error_log('INFO: Stop demande sur port '.$port.': '.$command);
 				}
 
-				echo 'Resultat de la commande: '.$output_exec;
-				error_log('INFO: Resultat de la commande: '.$output_exec);
+				$display_output = var_dump(implode(",", $output_exec));
+				echo 'Resultat de la commande: '.$display_output;
+				error_log('INFO: Resultat de la commande: '.$display_output);
 			}
 			else
 			{
@@ -65,8 +66,9 @@ if(isset($_GET['id']))
 				echo ' Start demande sur port '.$port.': '.$command;
 				error_log('INFO: Stop demande sur port '.$port.': '.$command);
 
-				echo 'Resultat de la commande: '.$output_exec;
-				error_log('INFO: Resultat de la commande: '.$output_exec);
+				$display_output = var_dump(implode(",", $output_exec));
+				echo 'Resultat de la commande: '.$display_output;
+				error_log('INFO: Resultat de la commande: '.$display_output);
 			}
 
 
