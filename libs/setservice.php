@@ -21,8 +21,8 @@ if(isset($_GET['id']))
 
 			$host     = $service['host'];
 			$port     = $service['port'];
-			$stop = $service['stop'];
-			$reload = $service['reload'];
+			$stop = isset($service['stop']) ? $service['stop'] : null;
+			$reload = isset($service['reload']) ? $service['reload'] : null;
 			$start = $service['start'];
 
 			$protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
@@ -38,7 +38,7 @@ if(isset($_GET['id']))
 				else
 				{
 				  echo ' Reload demande sur port '.$port.': '.$command;
-				  error_log("INFO: Stop demande sur port $port: $command");
+				  error_log("INFO: Reload demande sur port $port: $command");
 				}
 
 				$display_output = var_dump(implode(",", $output_exec));
@@ -49,7 +49,7 @@ if(isset($_GET['id']))
 			{
 				echo exec('sudo '.$start, $output_exec);
 				echo ' Start demande sur port '.$port.': '.$start;
-				error_log("INFO: Stop demande sur port $port: $start");
+				error_log("INFO: Start demande sur port $port: $start");
 
 				$display_output = var_dump(implode(",", $output_exec));
 				echo 'Resultat de la commande: '.$display_output;
