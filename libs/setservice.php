@@ -29,7 +29,6 @@ if(isset($_GET['id']))
 			if (Misc::scanPort($host, $port, $protocol))
 			{
 				$command = ($stop != null ? $stop : $reload);
-				exec("sudo $command", $output_exec);
 				if ($stop != null)
 				{
 				  echo ' Stop demande sur port '.$port.': '.$command;
@@ -40,6 +39,7 @@ if(isset($_GET['id']))
 				  echo ' Reload demande sur port '.$port.': '.$command;
 				  error_log("INFO: Reload demande sur port $port: $command");
 				}
+				exec("sudo $command", $output_exec);
 
 				$display_output = var_dump(implode(",", $output_exec));
 				echo 'Resultat de la commande: '.$display_output;
@@ -47,9 +47,10 @@ if(isset($_GET['id']))
 			}
 			else
 			{
-				echo exec('sudo '.$start, $output_exec);
 				echo ' Start demande sur port '.$port.': '.$start;
 				error_log("INFO: Start demande sur port $port: $start");
+
+				echo exec('sudo '.$start, $output_exec);
 
 				$display_output = var_dump(implode(",", $output_exec));
 				echo 'Resultat de la commande: '.$display_output;
