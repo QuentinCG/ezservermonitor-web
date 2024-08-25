@@ -22,23 +22,9 @@ if(isset($_GET['id']))
 			$host     = $service['host'];
 			$port     = $service['port'];
 
-			if (in_array("stop", $service)) {
-				$stop = $service['stop'];
-			} else {
-				$stop = null;
-			}
-
-			if (in_array("reload", $service)) {
-				$reload = $service['reload'];
-			} else {
-				$reload = null;
-			}
-
-			if (in_array("start", $service)) {
-				$start = $service['start'];
-			} else {
-				$start = null;
-			}
+			$stop = in_array("stop", $service) ? $service['stop'] : null;
+			$reload = in_array("reload", $service) ? $service['reload'] : null;
+			$start = in_array("start", $service) ? $service['start'] : null;
 
 			$protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
 			if (Misc::scanPort($host, $port, $protocol))
