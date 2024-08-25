@@ -321,12 +321,12 @@ esm.getServices = function() {
 
 esm.setServices = function(id) {
 
-	var debug = false ;
+	var debug = true;
 	var module = 'services';
 
 	$("a[service="+id+"]").toggleClass('spin disabled');
 
-	console.log('services '+id+' asked to be started/stoped/reloaded');
+	if(debug) console.log('services '+id+' asked to be started/stoped/reloaded');
 	$.get('libs/setservice.php?id='+id, function(resultat){
 
 		// On actualise la ligne correspondant au service
