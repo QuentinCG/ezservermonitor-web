@@ -100,7 +100,12 @@ else
         exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
         exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
 
-        if ($interface['name'] !== "lo") {
+        // Not lo nor vethXX nor br-XXX interfaces
+        if ($interface['name'] !== "lo"
+            && strpos($interface['name'], "veth") === false
+            && strpos($interface['name'], "br-") === false
+           )
+        {
             $datas[] = array(
                 'interface' => $interface['name'],
                 'ip'        => $interface['ip'],
