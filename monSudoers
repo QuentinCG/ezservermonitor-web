@@ -25,11 +25,14 @@ root	ALL=(ALL:ALL) ALL
 # See sudoers(5) for more information on "#include" directives:
 
 #includedir /etc/sudoers.d
-www-data ALL = NOPASSWD: /usr/bin/docker, /usr/sbin/service, /etc/init.d/ssh
+# eSM commands used by service actions (setservice.php) and optional apt update mode (apt.php)
+www-data ALL = NOPASSWD: /usr/bin/docker, /usr/sbin/service, /bin/systemctl, /usr/bin/systemctl, /etc/init.d/ssh, /bin/apt-get, /usr/bin/apt-get
 
 #www-data ALL = NOPASSWD:ALL ## Attention donne les droits root à www-data
 
 #####Pour voir ou se trouve les raccourcis shell, faire echo $PATH 
 #docker /usr/bin/docker
 #service /usr/sbin/service
+#systemctl /bin/systemctl or /usr/bin/systemctl
+#apt-get /bin/apt-get or /usr/bin/apt-get
 #ssh /etc/init.d/ssh

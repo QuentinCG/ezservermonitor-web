@@ -106,11 +106,16 @@ else
             && strpos($interface['name'], "br-") === false
            )
         {
+            $tx_bytes = isset($getBandwidth_tx[0]) ? (float)$getBandwidth_tx[0] : 0;
+            $rx_bytes = isset($getBandwidth_rx[0]) ? (float)$getBandwidth_rx[0] : 0;
+
             $datas[] = array(
                 'interface' => $interface['name'],
                 'ip'        => $interface['ip'],
-                'transmit'  => Misc::getSize($getBandwidth_tx[0]),
-                'receive'   => Misc::getSize($getBandwidth_rx[0]),
+                'transmit'  => Misc::getSize($tx_bytes),
+                'receive'   => Misc::getSize($rx_bytes),
+                'transmit_bytes' => $tx_bytes,
+                'receive_bytes'  => $rx_bytes,
             );
         }
 

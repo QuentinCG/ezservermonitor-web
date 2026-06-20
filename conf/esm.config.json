@@ -27,6 +27,35 @@
         "enable": true,
         "max": 5
     },
+    "service_history": {
+        "max": 20,
+        "max_file_lines": 1000,
+        "max_age_days": 2
+    },
+    "app_errors": {
+        "max": 50,
+        "max_file_lines": 1000,
+        "max_age_days": 2
+    },
+    "top_processes": {
+        "max": 5
+    },
+    "refresh": {
+        "system": 0,
+        "load_average": 0,
+        "cpu": 0,
+        "memory": 0,
+        "swap": 0,
+        "disk": 0,
+        "last_login": 0,
+        "network": 0,
+        "ping": 0,
+        "services": 0,
+        "service_history": 0,
+        "top_processes": 0,
+        "apt": 0,
+        "app_errors": 0
+    },
     "services": {
         "show_port": true,
         "list": [

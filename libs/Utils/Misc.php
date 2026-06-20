@@ -36,6 +36,23 @@ class Misc
     }
 
 
+    public static function logAppError($source, $message)
+    {
+        // libs/Utils/Misc.php → up 3 levels → app root
+        $storageDir = dirname(dirname(dirname(__FILE__))).'/storage';
+
+        if (!file_exists($storageDir))
+            @mkdir($storageDir, 0755, true);
+
+        $entry = json_encode(array(
+            'time'    => date('Y-m-d H:i:s'),
+            'source'  => $source,
+            'message' => $message,
+        ));
+
+        @file_put_contents($storageDir.'/app-errors.log', $entry.PHP_EOL, FILE_APPEND | LOCK_EX);
+    }
+
     /**
      * Returns CPU cores number
      * 
@@ -43,6 +60,17 @@ class Misc
      */
     public static function getCpuCoresNumber()
     {
+        // Read /proc/cpuinfo directly — no shell_exec required
+        if (is_readable('/proc/cpuinfo')) {
+            $content = file_get_contents('/proc/cpuinfo');
+            if ($content !== false) {
+                preg_match_all('/^processor\s*:/m', $content, $matches);
+                if (!empty($matches[0])) {
+                    return count($matches[0]);
+                }
+            }
+        }
+
         if (!($num_cores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo')))
         {
             if (!($num_cores = trim(shell_exec('/usr/bin/nproc'))))

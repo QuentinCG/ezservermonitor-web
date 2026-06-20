@@ -35,3 +35,15 @@ The [documentation](http://www.ezservermonitor.com/esm-web/documentation) explai
 Changelog is available [here](http://www.ezservermonitor.com/esm-web/changelog).
 
 **View more information on the [official website](http://www.ezservermonitor.com/esm-web/features).**
+
+## Server setup
+
+The `storage/` directory must be created inside the app root and be writable by the web server user. It is used to store the service action history log.
+
+```bash
+mkdir -p /var/www/performance/storage
+chown www-data:www-data /var/www/performance/storage
+chmod 755 /var/www/performance/storage
+```
+
+> Note: do not use a `log/` directory if it is symlinked to `/var/log` on your system.

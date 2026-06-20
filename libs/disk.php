@@ -20,6 +20,7 @@ if (!(exec('/bin/df -T -P | tail -n +2 | awk \'{ if (NF > 7) { for (i=1; i<NF-6;
 else
 {
     $mounted_points = array();
+    $tmp_entry = null;
     $key = 0;
 
     foreach ($df as $mounted)
@@ -29,7 +30,9 @@ else
         if ((int)trim($percent, '%') > 100)
             $percent = 100;
 
-        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
+        $isTmpMount = trim($mount) === '/tmp';
+
+        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false && !$isTmpMount)
             continue;
 
         if (strpos($filesystem, '/dev/loop') !== false && $Config->get('disk:show_loop') === false)
@@ -45,7 +48,7 @@ else
         {
             $mounted_points[] = trim($mount);
 
-            $datas[$key] = array(
+            $entry = array(
                 'total'         => Misc::getSize($total * 1024),
                 'used'          => Misc::getSize($used * 1024),
                 'free'          => Misc::getSize($free * 1024),
@@ -54,11 +57,18 @@ else
             );
 
             if ($Config->get('disk:show_filesystem'))
-                $datas[$key]['filesystem'] = $filesystem;
-        }
+                $entry['filesystem'] = $filesystem;
 
-        $key++;
+            if ($isTmpMount)
+                $tmp_entry = $entry;
+            else
+                $datas[$key++] = $entry;
+        }
     }
+
+    // Append /tmp last
+    if ($tmp_entry !== null)
+        $datas[] = $tmp_entry;
 
 }
 

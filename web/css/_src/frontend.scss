@@ -244,7 +244,116 @@ table.firstBold tbody tr td:first-child {
     }
 }
 
+.service-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #829cb7;
+    border-radius: 3px;
+    background: #e8eef4;
+    color: #4D5157;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    vertical-align: middle;
 
+    & + & {
+        margin-left: 3px;
+    }
+
+    &:hover {
+        background: #829cb7;
+        color: #fff;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+    }
+}
+
+.service-history-filters {
+    margin-bottom: 8px;
+
+    input,
+    select {
+        padding: 4px 6px;
+        border: 1px solid #cdd7e2;
+        margin-right: 6px;
+        font-size: 12px;
+    }
+}
+
+.top-process-tabs {
+    margin-bottom: 8px;
+
+    a {
+        display: inline-block;
+        padding: 4px 8px;
+        border: 1px solid #cdd7e2;
+        margin-right: 6px;
+        text-decoration: none;
+
+        &.active {
+            background: #829cb7;
+            color: #fff;
+            border-color: #829cb7;
+        }
+    }
+}
+
+.top-process-panel.hidden {
+    display: none;
+}
+
+/* Drag-and-drop flex grid */
+#main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    > .box {
+        float: none !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    > .box[data-width="half"]    { width: calc(50% - 5px); }
+    > .box[data-width="third"]   { width: calc(33.33% - 6.67px); }
+    > .box[data-width="quarter"] { width: calc(25% - 7.5px); }
+    > .box[data-width="full"]    { width: 100%; }
+}
+
+.width-toggle i { display: none; }
+.width-toggle::after { content: attr(data-label); font-size: 11px; font-weight: 600; line-height: 1; }
+
+li.drag-handle {
+    cursor: grab;
+    padding: 0 4px;
+    opacity: 0.5;
+    display: none;
+    align-items: center;
+
+    &:hover { opacity: 1; }
+    &:active { cursor: grabbing; }
+}
+
+.width-toggle { display: none !important; }
+
+body.edit-mode {
+    li.drag-handle { display: flex; }
+    .width-toggle  { display: inline-flex !important; }
+}
+
+#edit-layout-btn { opacity: 0.6; }
+#edit-layout-btn.active { opacity: 1; color: #fff; background: rgba(130,156,183,0.4); border-radius: 3px; }
+
+.sortable-ghost { opacity: 0.35; background: #e8eef4 !important; }
+.sortable-drag   { cursor: grabbing !important; }
 
 
 /* ------------------------- */
