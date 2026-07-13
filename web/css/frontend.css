@@ -657,11 +657,13 @@ body.edit-mode .width-toggle {
     opacity: 0.8;
     color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 3px;
-    font-size: 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 10px 10px;
+    margin: 0 2px;
 }
 #edit-layout-btn .esm-edit-label {
-    font-size: 13px;
+    font-size: 12px;
     vertical-align: middle;
 }
 #edit-layout-btn.active {
@@ -858,6 +860,9 @@ nav[role="main"] > ul > li.nav-sep {
     .nav-tool-label {
         display: none;
     }
+    .esm-edit-label {
+        display: none;
+    }
 }
 
 /* --------------------------------- */
@@ -871,16 +876,20 @@ nav[role="main"] > ul > li.nav-sep {
 }
 #esm-load_average .box-content > div.f-left {
     float: none !important;
-    flex: 1 1 100px;
-    min-width: 0;
-    overflow: hidden;
+    flex: 1 1 0;
+    min-width: 90px;
+    text-align: center;
 }
 
 /* --------------------------------- */
-/*  ==  Table horizontal scroll      */
+/*  ==  Full-width boxes on phones   */
 /* --------------------------------- */
-.box .box-content {
-    overflow-x: auto;
+@media (max-width: 767px) {
+    #main-container > .box[data-width="half"],
+    #main-container > .box[data-width="third"],
+    #main-container > .box[data-width="quarter"] {
+        width: 100%;
+    }
 }
 
 /* --------------------------------- */
