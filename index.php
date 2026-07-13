@@ -56,17 +56,12 @@ $assetVersion = implode('-', $assetVersionParts);
 <nav role="main">
     <div id="appname">
         <a href="index.php"><span class="icon-gauge"></span>eSM</a>
-        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
-    </div>
-
-    <div id="hostname">
-        <?php
-        if ($Config->get('esm:custom_title') != '')
-            echo $Config->get('esm:custom_title');
-        else
-            echo Misc::getHostname().' - '.Misc::getLanIP();
-        ?>
-        (with also: <!-- adminer.org --><b><a href="adminer.php" target=_blank>Adminer</a></b>, <!-- github.com/Arrexel/phpbash --><b><a href="phpbash.min.php" target=_blank>Bash</a></b>, <b><a href="phpinfo.php" target=_blank>Php-Info</a></b>, <b><a href="log/" target=_blank>Logs</a>)
+        <span class="appname-sub"><?php
+            if ($Config->get('esm:custom_title') != '')
+                echo $Config->get('esm:custom_title');
+            else
+                echo Misc::getHostname().' - '.Misc::getLanIP();
+        ?></span>
     </div>
 
 
@@ -77,6 +72,11 @@ $assetVersion = implode('-', $assetVersionParts);
     <?php endif; ?>
 
     <ul>
+        <li class="nav-tools"><a href="adminer.php" target="_blank" title="Adminer"><i class="fa fa-database"></i><span class="nav-tool-label"> Adminer</span></a></li>
+        <li class="nav-tools"><a href="phpbash.min.php" target="_blank" title="Bash"><i class="fa fa-terminal"></i><span class="nav-tool-label"> Bash</span></a></li>
+        <li class="nav-tools"><a href="phpinfo.php" target="_blank" title="PHP Info"><i class="fa fa-info-circle"></i><span class="nav-tool-label"> PHP Info</span></a></li>
+        <li class="nav-tools"><a href="log/" target="_blank" title="Logs"><i class="fa fa-file-text-o"></i><span class="nav-tool-label"> Logs</span></a></li>
+        <li class="nav-sep"></li>
         <li><a href="#" id="edit-layout-btn" onclick="esm.toggleEditMode(); return false;" title="Edit display"><i class="fa fa-pencil"></i><span class="esm-edit-label"> Edit</span></a></li>
         <li><a href="#" id="add-column-btn" title="Add empty column"><i class="fa fa-plus"></i></a></li>
         <li><a href="#" class="reload" onclick="esm.reloadBlock('all');"><span class="icon-cycle"></span></a></li>
@@ -145,17 +145,17 @@ $assetVersion = implode('-', $assetVersionParts);
         <div class="box-content t-center">
             <div class="f-left w33p">
                 <h3>1 min</h3>
-                <input type="text" class="gauge" id="load-average_1" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
+                <input type="text" class="gauge" id="load-average_1" value="0" data-height="90" data-width="120" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
             <div class="f-left w33p">
                 <h3>5 min</h3>
-                <input type="text" class="gauge" id="load-average_5" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
+                <input type="text" class="gauge" id="load-average_5" value="0" data-height="90" data-width="120" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
             <div class="f-left w33p">
                 <h3>15 min</h3>
-                <input type="text" class="gauge" id="load-average_15" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
+                <input type="text" class="gauge" id="load-average_15" value="0" data-height="90" data-width="120" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
             <div class="cls"></div>

@@ -830,3 +830,87 @@ body.edit-mode #add-column-btn {
 body.edit-mode .esm-column {
     min-height: 60px;
 }
+
+/* --------------------------------- */
+/*  ==  Nav quick-link tool buttons  */
+/* --------------------------------- */
+nav[role="main"] > ul > li.nav-tools > a {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 12px;
+    padding: 10px 10px;
+    margin: 0 2px;
+}
+nav[role="main"] > ul > li.nav-tools > a:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+}
+nav[role="main"] > ul > li.nav-sep {
+    display: inline-block;
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.3);
+    vertical-align: middle;
+    margin: 0 6px;
+}
+@media (max-width: 900px) {
+    .nav-tool-label {
+        display: none;
+    }
+}
+
+/* --------------------------------- */
+/*  ==  Load average - responsive    */
+/* --------------------------------- */
+#esm-load_average .box-content {
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#esm-load_average .box-content > div.f-left {
+    float: none !important;
+    flex: 1 1 100px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* --------------------------------- */
+/*  ==  Table horizontal scroll      */
+/* --------------------------------- */
+.box .box-content {
+    overflow-x: auto;
+}
+
+/* --------------------------------- */
+/*  ==  Appname sub (server name)    */
+/* --------------------------------- */
+nav[role="main"] #appname {
+    width: 220px;
+}
+nav[role="main"] #appname .appname-sub {
+    display: block;
+    font-size: 11px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.4;
+    padding-top: 1px;
+}
+@media (max-width: 600px) {
+    nav[role="main"] #appname {
+        width: 150px;
+    }
+}
+@media (max-width: 420px) {
+    nav[role="main"] #appname {
+        width: 90px;
+    }
+    nav[role="main"] #appname .appname-sub {
+        display: none;
+    }
+}
